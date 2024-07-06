@@ -141,6 +141,81 @@ class Tree {
       return values;
     }
   }
+
+  inOrder(callback = null) {
+    function inOrderRecursive(currentNode, callback = null) {
+      if (!currentNode) {
+        return;
+      }
+
+      inOrderRecursive(currentNode.left, callback);
+      if (callback) {
+        callback(currentNode);
+      } else {
+        values.push(currentNode.data);
+      }
+      inOrderRecursive(currentNode.right, callback);
+    }
+
+    if (!this.root) {
+      return null;
+    }
+    const values = [];
+    inOrderRecursive(this.root, callback);
+    if (!callback) {
+      return values;
+    }
+  }
+
+  preOrder(callback = null) {
+    function preOrderRecursive(currentNode, callback = null) {
+      if (!currentNode) {
+        return;
+      }
+
+      if (callback) {
+        callback(currentNode);
+      } else {
+        values.push(currentNode.data);
+      }
+      preOrderRecursive(currentNode.left, callback);
+      preOrderRecursive(currentNode.right, callback);
+    }
+
+    if (!this.root) {
+      return null;
+    }
+    const values = [];
+    preOrderRecursive(this.root, callback);
+    if (!callback) {
+      return values;
+    }
+  }
+
+  postOrder(callback = null) {
+    function postOrderRecursive(currentNode, callback = null) {
+      if (!currentNode) {
+        return;
+      }
+
+      postOrderRecursive(currentNode.left, callback);
+      postOrderRecursive(currentNode.right, callback);
+      if (callback) {
+        callback(currentNode);
+      } else {
+        values.push(currentNode.data);
+      }
+    }
+
+    if (!this.root) {
+      return null;
+    }
+    const values = [];
+    postOrderRecursive(this.root, callback);
+    if (!callback) {
+      return values;
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
