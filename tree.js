@@ -231,6 +231,28 @@ class Tree {
       return rightHeight + 1;
     }
   }
+
+  depth(node) {
+    function findDepth(currentNode, nodeToFind, currentDepth = 0) {
+      if (!currentNode) {
+        return 0;
+      }
+
+      if (currentNode.data === nodeToFind.data) {
+        return currentDepth;
+      }
+
+      if (currentNode.data > nodeToFind.data) {
+        currentDepth = findDepth(currentNode.left, nodeToFind, ++currentDepth);
+      } else {
+        currentDepth = findDepth(currentNode.right, nodeToFind, ++currentDepth);
+      }
+
+      return currentDepth;
+    }
+
+    return findDepth(this.root, node);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
