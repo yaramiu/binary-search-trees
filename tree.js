@@ -110,6 +110,37 @@ class Tree {
     const nodeToFind = new Node(value);
     return findNode(this.root, nodeToFind);
   }
+
+  levelOrder(callback = null) {
+    if (!this.root) {
+      return null;
+    }
+
+    const values = [];
+    const queue = [];
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+
+      if (callback) {
+        callback(currentNode);
+      } else {
+        values.push(currentNode.data);
+      }
+
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+
+    if (!callback) {
+      return values;
+    }
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
