@@ -83,6 +83,29 @@ class Tree {
     const nodeToDelete = new Node(value);
     this.root = deleteNode(this.root, nodeToDelete);
   }
+
+  find(value) {
+    function findNode(currentNode, nodeToFind) {
+      if (!currentNode) {
+        return null;
+      }
+
+      if (currentNode.data === nodeToFind.data) {
+        return currentNode;
+      }
+
+      if (currentNode.data > nodeToFind.data) {
+        currentNode = findNode(currentNode.left, nodeToFind);
+      } else {
+        currentNode = findNode(currentNode.right, nodeToFind);
+      }
+
+      return currentNode;
+    }
+
+    const nodeToFind = new Node(value);
+    return findNode(this.root, nodeToFind);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
