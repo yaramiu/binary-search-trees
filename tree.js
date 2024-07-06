@@ -253,6 +253,28 @@ class Tree {
 
     return findDepth(this.root, node);
   }
+
+  isBalanced() {
+    const isBalancedRecursive = (currentNode) => {
+      if (!currentNode) {
+        return true;
+      }
+
+      const leftHeight = this.height(currentNode.left);
+      const rightHeight = this.height(currentNode.right);
+
+      if (Math.abs(leftHeight - rightHeight) > 1) {
+        return false;
+      }
+
+      const isLeftBalanced = isBalancedRecursive(currentNode.left);
+      const isRightBalanced = isBalancedRecursive(currentNode.right);
+
+      return isLeftBalanced && isRightBalanced;
+    };
+
+    return isBalancedRecursive(this.root);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
