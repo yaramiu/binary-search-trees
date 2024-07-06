@@ -44,6 +44,10 @@ class Tree {
       return currentNode;
     }
 
+    if (this.find(value)) {
+      return;
+    }
+
     const newNode = new Node(value);
     this.root = insertToLeafNode(this.root, newNode);
   }
