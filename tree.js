@@ -275,6 +275,11 @@ class Tree {
 
     return isBalancedRecursive(this.root);
   }
+
+  rebalance() {
+    const values = this.inOrder();
+    this.root = this.buildTree(values);
+  }
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
